@@ -17,15 +17,19 @@ client.on("message", async (m) => {
     list.servers.forEach((e) => {
       if (m.channel.server_id === e) {
         list.channels.forEach((e) => {
-          if (m.channel_id === e) {
+          if (m.channel_id === e) { 
             const content = m.content
               .split(" ")
-              .filter((c) => c.match(/([0-9])/g))
+              .filter((c) => c.match(/[0-9]\d*$/g))
               .join();
             if (content) {
               const n = parseInt(content);
               const final = n + 1;
-              m.channel.sendMessage(final.toString());
+              if (final === 7000) {
+                m.channel.sendMessage(`${final} :trol:`);
+              } else {
+                m.channel.sendMessage(final.toString());
+              }
             }
           }
         });
